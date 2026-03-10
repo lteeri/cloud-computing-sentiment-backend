@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import pickle
 
 app = Flask(__name__)
@@ -16,3 +16,26 @@ print("should be negative: ", sentiment_model.predict(["Some day my dog will die
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
+
+@app.route("/analysis", methods=['POST'])
+def sentiment_analysis():
+    req = request.get_json()
+
+    print("req data: ", req)
+
+    # if there is no request data, we can do an early return
+    if req is None:
+        return "No JSON received", 400
+
+    # if there is data, we move here
+    # let's do the sentimnt analysis
+    analysis = sentiment_model.predict([req["sentence"]])
+    print(analysis)
+
+    # a small error check for if the analysis list is empty
+    if analysis is None:
+        return "Analysis couldn't be done. Please try again."
+    
+    # the analysis looks like this ['positive'] so we want the index 0 word out
+    result = analysis[0]
+    return {"analysis": result}
