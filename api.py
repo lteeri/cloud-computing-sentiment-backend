@@ -3,9 +3,9 @@ import pickle
 
 import os
 
-testing_env_var = os.environ.get("ANOTHER-ENV-VARIABLE", "This is in api.py")
+testing_env_var = os.environ.get("ANOTHER_ENV_VARIABLE", "This is in api.py")
 debug_env = os.environ.get("DEBUG")
-host_ip_env = os.environ.get("HOST-IP")
+host_ip_env = os.environ.get("HOST_IP")
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ print("should be negative: ", sentiment_model.predict(["Some day my dog will die
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>" f"<p>Testing env variable: {testing_env_var}</p>" \
-    f"<p>Debug mode: {debug_env}</p>" f"<p>Debug mode: {host_ip_env}</p>"
+    f"<p>Debug mode: {debug_env}</p>" f"<p>Host IP: {host_ip_env}</p>"
 
 
 @app.route("/analysis", methods=['POST'])
