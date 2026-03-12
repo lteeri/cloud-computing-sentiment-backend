@@ -1,6 +1,10 @@
 from flask import Flask, request
 import pickle
 
+import os
+
+testing_env_var = os.environ.get("ANOTHER-ENV-VARIABLE", "This is in api.py")
+
 app = Flask(__name__)
 
 # bringing the sentiment analysis tool into the backend using pickle
@@ -15,7 +19,7 @@ print("should be negative: ", sentiment_model.predict(["Some day my dog will die
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World! I am interested in how Rahti responses to this change.</p>"
+    return "<p>Hello, World!</p>" f"<p>Testing env variable: {testing_env_var}</p>"
 
 @app.route("/analysis", methods=['POST'])
 def sentiment_analysis():

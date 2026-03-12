@@ -3,3 +3,8 @@ services:
     build: .
     ports:
      - 5556:8080
+    
+    environment:
+      DEBUG: "true"
+      HOST-IP:  "Not set"
+      ANOTHER-ENV-VARIABLE: "This is written in the docker-compose.yaml file"
