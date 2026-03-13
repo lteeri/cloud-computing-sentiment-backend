@@ -4,3 +4,6 @@ waitress==3.0.2
 
 # version 1.6.1 was used to create the model
 scikit-learn==1.6.1
+
+# setting the access controll headers
+flask-cors
