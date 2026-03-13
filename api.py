@@ -16,10 +16,10 @@ host_ip_env = os.environ.get("HOST_IP")
 api_config = {
     "origins" : [
         # localhost for testing
-        "http://localhost:5173/",
+        "http://localhost:5173",
 
         # deployed frontend
-        "https://cloud-computing-sentiment-frontend.onrender.com/"
+        "https://cloud-computing-sentiment-frontend.onrender.com"
     ]
 }
 CORS(app,resources={"/*": api_config})
