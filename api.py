@@ -1,13 +1,29 @@
 from flask import Flask, request
 import pickle
 
+from flask_cors import CORS
+
 import os
 
+app = Flask(__name__)
+
+# using the environment variables
 testing_env_var = os.environ.get("ANOTHER_ENV_VARIABLE", "This is in api.py")
 debug_env = os.environ.get("DEBUG")
 host_ip_env = os.environ.get("HOST_IP")
 
-app = Flask(__name__)
+# adding the Access-Control-Allow-Origin header to allow requests from these specific addresses
+api_config = {
+    "origins" : [
+        # localhost for testing
+        "http://localhost:5173/",
+
+        # deployed frontend
+        "https://cloud-computing-sentiment-frontend.onrender.com/"
+    ]
+}
+CORS(app,resources={"/", api_config})
+
 
 # bringing the sentiment analysis tool into the backend using pickle
 with open("sentiment_model_sklearn_1.6.1.pkl", "rb") as file:
