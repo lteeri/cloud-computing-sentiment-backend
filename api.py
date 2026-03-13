@@ -22,7 +22,7 @@ api_config = {
         "https://cloud-computing-sentiment-frontend.onrender.com/"
     ]
 }
-CORS(app,resources={"/", api_config})
+CORS(app,resources={"/*", api_config})
 
 
 # bringing the sentiment analysis tool into the backend using pickle
